@@ -3,151 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto Z - Login Premium</title>
+    <title>Projeto Z - Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #050507;
-            --card: rgba(13, 13, 18, 0.7);
-            --accent: #D4AF37;
-            --accent-glow: rgba(212, 175, 55, 0.2);
-            --gold-gradient: linear-gradient(135deg, #B8860B 0%, #F9E274 50%, #D4AF37 100%);
-            --text: #FFFFFF;
-            --subtext: #94a3b8;
-            --border: rgba(255, 255, 255, 0.05);
-        }
+   <style>
+    :root {
+        --bg: #050507;
+        --card: rgba(13, 13, 18, 0.7); /* Vidro translúcido */
+        --accent: #D4AF37;
+        --accent-glow: rgba(212, 175, 55, 0.2);
+        --gold-gradient: linear-gradient(135deg, #B8860B 0%, #F9E274 50%, #D4AF37 100%);
+        --text: #FFFFFF;
+        --subtext: #94a3b8;
+        --border: rgba(255, 255, 255, 0.05);
+    }
 
-        body {
-            background: var(--bg);
-            background-image: radial-gradient(circle at 50% -20%, #1e1e26 0%, #050507 80%);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
+    body {
+        background: var(--bg);
+        /* Luz de fundo para dar profundidade */
+        background-image: radial-gradient(circle at 50% -20%, #1e1e26 0%, #050507 80%);
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
 
-        .login-container {
-            background: var(--card);
-            backdrop-filter: blur(20px);
-            padding: 40px;
-            border-radius: 28px;
-            border: 1px solid var(--border);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            width: 90%;
-            max-width: 380px;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
+    /* Brilho extra atrás do container */
+    .login-container::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: var(--accent);
+        filter: blur(120px);
+        opacity: 0.1;
+        z-index: -1;
+    }
 
-        h1 {
-            margin: 0 0 5px 0;
-            font-size: 2.2rem;
-            letter-spacing: 6px;
-            font-weight: 900;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            filter: drop-shadow(0 0 10px var(--accent-glow));
-        }
+    .login-container {
+        background: var(--card);
+        backdrop-filter: blur(20px); /* EFEITO GLASSMORPHISM */
+        padding: 40px;
+        border-radius: 28px;
+        border: 1px solid var(--border);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        width: 90%;
+        max-width: 380px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
 
-        p { 
-            color: var(--subtext); 
-            font-size: 0.75rem; 
-            margin-bottom: 35px; 
-            text-transform: uppercase; 
-            letter-spacing: 2px;
-        }
+    h1 {
+        margin: 0 0 5px 0;
+        font-size: 2.2rem;
+        letter-spacing: 6px;
+        font-weight: 900;
+        background: var(--gold-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: uppercase;
+        filter: drop-shadow(0 0 10px var(--accent-glow));
+    }
 
-        .input-group { text-align: left; margin-bottom: 22px; }
+    p { 
+        color: var(--subtext); 
+        font-size: 0.75rem; 
+        margin-bottom: 35px; 
+        text-transform: uppercase; 
+        letter-spacing: 2px;
+    }
 
-        label {
-            display: block;
-            color: var(--accent);
-            font-size: 0.65rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            letter-spacing: 1.5px;
-            opacity: 0.8;
-        }
+    .input-group { text-align: left; margin-bottom: 22px; }
 
-        .neon-input {
-            width: 100%;
-            padding: 16px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--border);
-            color: #fff;
-            border-radius: 14px;
-            box-sizing: border-box;
-            outline: none;
-            font-size: 15px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+    label {
+        display: block;
+        color: var(--accent);
+        font-size: 0.65rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        letter-spacing: 1.5px;
+        opacity: 0.8;
+    }
 
-        .neon-input:focus {
-            border-color: var(--accent);
-            background: rgba(0, 0, 0, 0.6);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
-            transform: translateY(-2px);
-        }
+    .neon-input {
+        width: 100%;
+        padding: 16px;
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--border);
+        color: #fff;
+        border-radius: 14px;
+        box-sizing: border-box;
+        outline: none;
+        font-size: 15px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-        .btn-gold-premium {
-            width: 100%;
-            padding: 18px;
-            border-radius: 14px;
-            background: var(--gold-gradient);
-            color: #000;
-            border: none;
-            font-weight: 900;
-            text-transform: uppercase;
-            cursor: pointer;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            transition: all 0.4s;
-            margin-top: 15px;
-            box-shadow: 0 10px 20px -5px rgba(184, 134, 11, 0.4);
-        }
+    .neon-input:focus {
+        border-color: var(--accent);
+        background: rgba(0, 0, 0, 0.6);
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+        transform: translateY(-2px);
+    }
 
-        .btn-gold-premium:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px -5px rgba(184, 134, 11, 0.6);
-            filter: brightness(1.1);
-        }
+    .btn-gold-premium {
+        width: 100%;
+        padding: 18px;
+        border-radius: 14px;
+        background: var(--gold-gradient);
+        color: #000;
+        border: none;
+        font-weight: 900;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+        transition: all 0.4s;
+        margin-top: 15px;
+        box-shadow: 0 10px 20px -5px rgba(184, 134, 11, 0.4);
+    }
 
-        /* ESTILO DO BOTÃO ESQUECI SENHA */
-        .btn-reset {
-            background: none;
-            border: none;
-            color: var(--subtext);
-            font-size: 0.65rem;
-            margin-top: 20px;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
-            transition: 0.3s;
-        }
+    .btn-gold-premium:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px -5px rgba(184, 134, 11, 0.6);
+        filter: brightness(1.1);
+    }
 
-        .btn-reset:hover {
-            color: var(--accent);
-            text-decoration: underline;
-        }
-
-        #message {
-            margin-top: 25px;
-            font-size: 0.7rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            min-height: 15px;
-        }
-    </style>
+    #message {
+        margin-top: 25px;
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+</style>
 </head>
 <body>
 
@@ -166,16 +159,15 @@
         </div>
 
         <button id="login-btn" class="btn-gold-premium">Entrar</button>
-        
-        <button id="reset-btn" class="btn-reset">Recuperar Acesso</button>
 
         <div id="message"></div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
+        // Mantenha suas credenciais reais aqui
         const firebaseConfig = {
             apiKey: "AIzaSyCsvNMfta3Y2sQUxYHunCIyTcrrH6eT6j8",
             authDomain: "projetoz-do-vini.firebaseapp.com",
@@ -189,17 +181,15 @@
         const auth = getAuth(app);
 
         const loginBtn = document.getElementById('login-btn');
-        const resetBtn = document.getElementById('reset-btn');
         const messageDiv = document.getElementById('message');
 
-        // FUNÇÃO DE LOGIN
         loginBtn.addEventListener('click', async () => {
             const email = document.getElementById('email').value;
             const senha = document.getElementById('password').value;
 
             if (!email || !senha) {
-                messageDiv.innerText = "ERRO: ESCALAÇÃO INCOMPLETA!";
-                messageDiv.style.color = "#FF003C";
+                messageDiv.innerText = "Preencha a escalação completa!";
+                messageDiv.style.color = "#FF003C"; // Cor Danger
                 return;
             }
 
@@ -209,34 +199,14 @@
             try {
                 await signInWithEmailAndPassword(auth, email, senha);
                 messageDiv.innerText = "GOL! ACESSO LIBERADO.";
-                messageDiv.style.color = "#39FF14";
+                messageDiv.style.color = "#39FF14"; // Cor Success
 
                 setTimeout(() => {
                     window.location.href = "dashboard.html";
-                }, 1200);
+                }, 1000);
 
             } catch (error) {
                 messageDiv.innerText = "ERRO: JOGADOR NÃO ENCONTRADO";
-                messageDiv.style.color = "#FF003C";
-            }
-        });
-
-        // FUNÇÃO DE RESET (ADICIONADA)
-        resetBtn.addEventListener('click', async () => {
-            const email = document.getElementById('email').value;
-
-            if (!email) {
-                messageDiv.innerText = "DIGITE O E-MAIL PARA RECUPERAR";
-                messageDiv.style.color = "#D4AF37";
-                return;
-            }
-
-            try {
-                await sendPasswordResetEmail(auth, email);
-                messageDiv.innerText = "E-MAIL ENVIADO! CONFIRA O SPAM.";
-                messageDiv.style.color = "#39FF14";
-            } catch (error) {
-                messageDiv.innerText = "ERRO AO DISPARAR E-MAIL";
                 messageDiv.style.color = "#FF003C";
             }
         });
