@@ -1,0 +1,44 @@
+:root {
+            --bg: #050507; --card: #0d0d12; --accent: #D4AF37;
+            --gold-grad: linear-gradient(135deg, #B8860B 0%, #F9E274 50%, #D4AF37 100%);
+            --text: #FFFFFF; --subtext: #94a3b8; --border: #1e1e26;
+            --danger: #ff4d4d; --success: #39FF14; --info: #00d4ff;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; padding-bottom: 110px; overflow-x: hidden; }
+
+        header { padding: 25px; background: var(--card); border-bottom: 1px solid var(--border); text-align: center; }
+        h1 { margin: 0; font-size: 1.5rem; font-weight: 900; letter-spacing: 3px; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; }
+
+        .nav-bottom {
+            position: fixed; bottom: 0; width: 100%; background: var(--card);
+            display: flex; overflow-x: auto; padding: 18px 10px;
+            border-top: 1px solid var(--border); z-index: 100; gap: 20px; scrollbar-width: none;
+        }
+        .nav-bottom::-webkit-scrollbar { display: none; }
+        .nav-btn { background: none; border: none; color: var(--subtext); font-size: 0.65rem; font-weight: 800; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: 0.3s; padding: 5px 10px; }
+        .nav-btn.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+
+        .section { display: none; padding: 20px; animation: fadeIn 0.3s ease; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        .gold-card { background: var(--card); padding: 18px; border-radius: 18px; border: 1px solid var(--border); margin-bottom: 12px; position: relative; }
+        
+        input, select { width: 100%; padding: 15px; background: #000; border: 1px solid var(--border); color: #fff; border-radius: 12px; margin-bottom: 12px; font-size: 0.9rem; }
+        .btn-main { width: 100%; padding: 16px; border-radius: 12px; border: none; background: var(--gold-grad); color: #000; font-weight: 900; text-transform: uppercase; cursor: pointer; font-size: 0.8rem; }
+        
+        .badge { padding: 6px 10px; border-radius: 8px; font-size: 0.6rem; font-weight: 900; border: 1px solid transparent; }
+        .badge-pago { border-color: var(--success); color: var(--success); background: rgba(57, 255, 20, 0.05); }
+        .badge-pendente { border-color: var(--danger); color: var(--danger); background: rgba(255, 77, 77, 0.05); }
+        
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 200; padding: 20px; }
+        .modal-content { background: var(--card); padding: 30px; border-radius: 25px; width: 100%; max-width: 380px; border: 1px solid var(--accent); }
+
+        .bar-container { width: 100%; background: #111; border-radius: 5px; height: 10px; margin-top: 5px; overflow: hidden; }
+        .bar-fill { background: var(--gold-grad); height: 100%; transition: 0.5s; }
+        
+        .install-box { background: linear-gradient(180deg, #16161d 0%, #0d0d12 100%); border: 1px dashed var(--accent); padding: 20px; border-radius: 20px; margin-bottom: 20px; }
+        .step { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; font-size: 0.8rem; color: var(--subtext); }
+        .step-num { background: var(--gold-grad); color: #000; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.7rem; flex-shrink: 0; }

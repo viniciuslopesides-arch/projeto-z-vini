@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Projeto Z - Business Elite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/dash.css">
+</head>
+<body>
+    <header style="padding: 20px; text-align: center; background: var(--card); border-bottom: 1px solid var(--border);">
+        <h1 style="margin: 0; font-size: 1.2rem; letter-spacing: 2px;">PROJETO Z</h1>
+        <p id="user-display" style="font-size:0.55rem; color:var(--accent); font-weight:700; margin: 5px 0 0 0;">CARREGANDO...</p>
+    </header>
+
+    <section id="aba-financas" class="section active">
+        <h3 style="color:var(--accent)">Fluxo Financeiro</h3>
+        <div class="gold-card" style="background: var(--gold-grad); color: #000; border: none;">
+            <span>Bruto do Dia</span><br><b id="f-total" style="font-size:2rem">R$ 0,00</b>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="gold-card"><span>Pix</span><br><b id="f-pix">R$ 0,00</b></div>
+            <div class="gold-card"><span>Dinheiro</span><br><b id="f-dinheiro">R$ 0,00</b></div>
+            <div class="gold-card"><span>Débito</span><br><b id="f-debito">R$ 0,00</b></div>
+            <div class="gold-card"><span>Crédito</span><br><b id="f-credito">R$ 0,00</b></div>
+        </div>
+        <button class="btn-main" style="background:var(--danger); color:#fff; margin-top:20px" id="btnFecharCaixa">Encerrar Caixa</button>
+    </section>
+
+    <section id="aba-corte" class="section">
+        <h3 style="color:var(--accent)">Novo Atendimento</h3>
+        <div class="gold-card">
+            <input type="text" id="c-nome" placeholder="Nome do Cliente">
+            <select id="c-plano"></select>
+            <button class="btn-main" id="btnSalvarCorte">Lançar Atendimento</button>
+        </div>
+        <h4 style="color:var(--subtext); margin-top:25px; font-size:0.8rem">ÚLTIMOS CLIENTES</h4>
+        <div id="lista-clientes-atendidos"></div>
+    </section>
+
+    <section id="aba-devedores" class="section">
+        <h3 style="color:var(--danger)">Pendências</h3>
+        <div id="lista-somente-devedores"></div>
+        <p id="msg-limpo" style="display:none; text-align:center; color:var(--success); margin-top:40px;">TUDO EM DIA! ✌️</p>
+    </section>
+
+    <section id="aba-relatorios" class="section">
+        <h3 style="color:var(--accent)">Performance</h3>
+        <div id="grafico-performance" class="gold-card"></div>
+        <h3 style="color:var(--subtext); margin-top:30px; font-size:0.8rem">HISTÓRICO DE FECHAMENTOS</h3>
+        <div id="lista-historico-detalhado"></div>
+    </section>
+
+    <section id="aba-planos" class="section">
+        <h3 style="color:var(--accent)">Gestão de Planos</h3>
+        <div class="gold-card">
+            <input type="text" id="p-nome" placeholder="Ex: Corte + Barba">
+            <input type="number" id="p-preco" placeholder="Valor Total R$">
+            <input type="number" id="p-cortes" placeholder="Quantidade de Cortes">
+            <button class="btn-main" id="btnNovoPlano">Criar Plano</button>
+        </div>
+        <div id="lista-planos-gestao" style="margin-top:20px"></div>
+    </section>
+
+    <section id="aba-ajustes" class="section">
+        <h3 style="color:var(--accent)">Configurações</h3>
+        <div class="install-box">
+            <p style="margin-top:0; font-weight:900; color:#fff; font-size:0.9rem">INSTALAR APP NO CELULAR</p>
+            <div class="step"><div class="step-num">1</div><span>No Safari ou Chrome toque em <b>Compartilhar</b></span></div>
+            <div class="step"><div class="step-num">2</div><span>Selecione <b>"Adicionar à Tela de Início"</b></span></div>
+        </div>
+        <button class="btn-main" style="background:#111; color:var(--accent); border: 1px solid var(--border); margin-bottom:12px" id="btnBackup">BAIXAR BACKUP (JSON)</button>
+        <button class="btn-main" style="background:var(--danger); color:#fff; margin-top:40px" id="btnResetGeral">RESET TOTAL DO SISTEMA</button>
+        <button class="btn-main" style="background:transparent; color:var(--subtext); margin-top:10px" onclick="window.btnLogout()">Sair da Conta</button>
+    </section>
+
+    <div id="modalAcao" class="modal">
+        <div class="modal-content">
+            <h3 id="modalNome" style="color:var(--accent); margin-top:0">Ação</h3>
+            <div style="margin-bottom:20px; background: rgba(0,212,255,0.05); padding:15px; border-radius:15px; border:1px solid #1e1e26">
+                <span style="font-size:0.6rem; color:var(--info); font-weight:900">SALDO DE CORTES:</span>
+                <div style="display:flex; align-items:center; gap:20px; justify-content:center; margin-top:10px">
+                    <button onclick="window.ajustarSaldo(-1)" style="background:#000; border:1px solid var(--border); color:white; padding:10px 20px; border-radius:8px">-</button>
+                    <b id="modalSaldoNum" style="font-size:2rem; color:var(--info)">0</b>
+                    <button onclick="window.ajustarSaldo(1)" style="background:#000; border:1px solid var(--border); color:white; padding:10px 20px; border-radius:8px">+</button>
+                </div>
+            </div>
+            <input type="number" id="modalPgValor" placeholder="Valor Recebido R$">
+            <select id="modalPgMetodo">
+                <option value="Pix">Pix</option>
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Débito">Débito</option>
+                <option value="Crédito">Crédito</option>
+            </select>
+            <button class="btn-main" onclick="window.confirmarAcao()">Confirmar Registro</button>
+            <button onclick="document.getElementById('modalAcao').style.display='none'" style="background:none; border:none; color:var(--subtext); margin-top:15px; width:100%; font-size:0.6rem">CANCELAR</button>
+        </div>
+    </div>
+
+    <nav class="nav-bottom">
+        <button class="nav-btn active" onclick="tab('aba-financas', this)">Finanças</button>
+        <button class="nav-btn" onclick="tab('aba-corte', this)">Cortes</button>
+        <button class="nav-btn" onclick="tab('aba-devedores', this)">Devedores</button>
+        <button class="nav-btn" onclick="tab('aba-relatorios', this)">Relatórios</button>
+        <button class="nav-btn" onclick="tab('aba-planos', this)">Planos</button>
+        <button class="nav-btn" onclick="tab('aba-ajustes', this)">Ajustes</button>
+    </nav>
+
+    <script type="module" src="js/dash.js"></script>
+</body>
+</html>
