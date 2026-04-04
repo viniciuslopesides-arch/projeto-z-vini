@@ -4,21 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BarberCash - Business Elite</title>
+    
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#050507">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icon.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/dash.css">
 </head>
 <body>
     <header style="padding: 20px; text-align: center; background: var(--card); border-bottom: 1px solid var(--border);">
-        <h1 style="margin: 0; font-size: 1.2rem; letter-spacing: 2px;">BarberCash</h1>
+        <h1 style="margin: 0; font-size: 1.2rem; letter-spacing: 2px; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900;">BarberCash</h1>
         <p id="user-display" style="font-size:0.55rem; color:var(--accent); font-weight:700; margin: 5px 0 0 0;">CARREGANDO...</p>
     </header>
 
     <section id="aba-financas" class="section active">
         <h3 style="color:var(--accent)">Finanças</h3>
         <div class="gold-card" style="background: var(--gold-grad); color: #000; border: none;">
-            <span>Caixa</span><br><b id="f-total" style="font-size:2rem">R$ 0,00</b>
+            <span>Caixa Atual</span><br><b id="f-total" style="font-size:2rem">R$ 0,00</b>
         </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
             <div class="gold-card"><span>Pix</span><br><b id="f-pix">R$ 0,00</b></div>
@@ -33,7 +38,7 @@
         <h3 style="color:var(--accent)">Novo Atendimento</h3>
         <div class="gold-card">
             <input type="text" id="c-nome" placeholder="Nome do Cliente">
-            <select id="c-plano"></select>
+            <select id="c-plano" style="margin: 10px 0;"></select>
             <button class="btn-main" id="btnSalvarCorte">Lançar Atendimento</button>
         </div>
         <h4 style="color:var(--subtext); margin-top:25px; font-size:0.8rem">ÚLTIMOS CLIENTES</h4>
@@ -66,12 +71,19 @@
 
     <section id="aba-ajustes" class="section">
         <h3 style="color:var(--accent)">Configurações</h3>
-        <div class="install-box">
-            <p style="margin-top:0; font-weight:900; color:#fff; font-size:0.9rem">INSTALAR APP NO CELULAR</p>
-            <div class="step"><div class="step-num">1</div><span>No Safari ou Chrome toque em <b>Compartilhar</b></span></div>
-            <div class="step"><div class="step-num">2</div><span>Selecione <b>"Adicionar à Tela de Início"</b></span></div>
+        
+        <div class="install-box" id="installContainer" style="display:none; border: 1px dashed var(--accent); background: rgba(212, 175, 55, 0.05); padding: 15px; border-radius: 12px; margin-bottom: 20px; text-align: center;">
+            <p style="margin-top:0; font-weight:900; color:#fff; font-size:0.8rem; letter-spacing: 1px;">BARBERCASH NO CELULAR</p>
+            <button class="btn-main" id="btnInstall" style="background: var(--gold-grad); color: #000; border:none; width: 100%; font-weight: 900; height: 40px;">INSTALAR AGORA</button>
         </div>
-        <button class="btn-main" style="background:#111; color:var(--accent); border: 1px solid var(--border); margin-bottom:12px" id="btnBackup">BAIXAR BACKUP (JSON)</button>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+            <button class="btn-main" style="background:#111; color:var(--accent); border: 1px solid var(--border); margin:0;" id="btnBackup">BAIXAR BACKUP</button>
+            
+            <button class="btn-main" style="background:#111; color:var(--info); border: 1px solid var(--border); margin:0;" onclick="document.getElementById('fileInput').click()">SUBIR BACKUP</button>
+            <input type="file" id="fileInput" accept=".json" style="display:none">
+        </div>
+
         <button class="btn-main" style="background:var(--danger); color:#fff; margin-top:40px" id="btnResetGeral">RESET TOTAL DO SISTEMA</button>
         <button class="btn-main" style="background:transparent; color:var(--subtext); margin-top:10px" onclick="window.btnLogout()">Sair da Conta</button>
     </section>
@@ -88,13 +100,13 @@
                 </div>
             </div>
             <input type="number" id="modalPgValor" placeholder="Valor Recebido R$">
-            <select id="modalPgMetodo">
+            <select id="modalPgMetodo" style="margin-top: 10px;">
                 <option value="Pix">Pix</option>
                 <option value="Dinheiro">Dinheiro</option>
                 <option value="Débito">Débito</option>
                 <option value="Crédito">Crédito</option>
             </select>
-            <button class="btn-main" onclick="window.confirmarAcao()">Confirmar Registro</button>
+            <button class="btn-main" onclick="window.confirmarAcao()" style="margin-top: 15px;">Confirmar Registro</button>
             <button onclick="document.getElementById('modalAcao').style.display='none'" style="background:none; border:none; color:var(--subtext); margin-top:15px; width:100%; font-size:0.6rem">CANCELAR</button>
         </div>
     </div>
