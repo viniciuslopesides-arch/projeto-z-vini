@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BarberCash</title>
+    <title>BarberCash - Login Elite</title>
+    
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#050507">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icon.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
 </head>
@@ -13,27 +19,45 @@
 
     <div class="login-container">
         <header>
-            <h1>BarberCash</h1>
-            <p>Business Management Elite</p>
+            <h1 style="background: linear-gradient(135deg, #B8860B 0%, #F9E274 50%, #D4AF37 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; font-weight: 900; letter-spacing: 4px;">
+                BarberCash
+            </h1>
+            <p style="color: #94a3b8; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;">
+                Business Management Elite
+            </p>
         </header>
 
         <div class="input-group">
-            <label>ACESSO DO OPERADOR</label>
+            <label style="color: #D4AF37; font-size: 0.65rem; font-weight: 900; letter-spacing: 1px;">
+                ACESSO DO OPERADOR
+            </label>
             <input type="email" id="email" class="neon-input" placeholder="seu@email.com">
         </div>
 
         <div class="input-group">
-            <label>CHAVE DE SEGURANÇA</label>
+            <label style="color: #D4AF37; font-size: 0.65rem; font-weight: 900; letter-spacing: 1px;">
+                CHAVE DE SEGURANÇA
+            </label>
             <input type="password" id="password" class="neon-input" placeholder="••••••••">
         </div>
 
         <button class="btn-gold-premium" id="btnLogin">INICIAR SISTEMA</button>
         
-        <button class="btn-reset" id="btnReset">Esqueci minha senha</button>
+        <button class="btn-reset" id="btnReset" style="background:none; border:none; color:#64748b; font-size:0.7rem; margin-top:15px; cursor:pointer;">
+            Esqueci minha senha
+        </button>
 
-        <div id="message"></div>
+        <div id="message" style="margin-top: 15px; font-size: 0.8rem;"></div>
     </div>
 
     <script type="module" src="js/index.js"></script>
+    
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log("Service Worker Ativo"))
+                .catch(err => console.log("Erro SW:", err));
+        }
+    </script>
 </body>
 </html>
